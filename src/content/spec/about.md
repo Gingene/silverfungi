@@ -1,5 +1,10 @@
 # About
-This is the demo site for [Fuwari](https://github.com/saicaca/fuwari).
+銀光菇 [Gingene](https://github.com/Gingene/silverfungi)
+::github{repo="Gingene/silverfungi"}
+
+---
+
+This website is based on [Fuwari](https://github.com/saicaca/fuwari).
 
 ::github{repo="saicaca/fuwari"}
 

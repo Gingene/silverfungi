@@ -1,0 +1,116 @@
+---
+title: 在astro使用react和vue的component
+published: 2024-07-09
+description: 在astro使用react和vue的component
+image: ''
+author: '銀光菇'
+tags: [Astro, Blogging]
+category: 'Astro'
+draft: false 
+
+---
+
+import Counter from '@/components/forpost/Counter';
+import InputModal from '@/components/forpost/InputModal.vue';
+
+第一篇筆記先寫一篇關於astro的特色
+
+## 在astro可以同時import .jsx/.tsx 和.vue的文件
+
+首先先安裝astro的react和vue的package
+
+```sh
+pnpm astro add react vue
+```
+
+過程中會需要按y確認安裝的package
+然後到src/components中建立對應的文件
+在網頁中import元件進來使用就可以了(md文件則要使用mdx才能使用)
+
+## react components
+
+簡單寫一個counter的元件
+
+```tsx
+// 路徑 /src/components/Counter.tsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <div className="space-x-2">
+        <button
+          className="border rounded-md px-2 py-3 bg-amber-700"
+          onClick={() => setCount(count - 1)}
+        >
+          減少數量-
+        </button>
+        <span>Count: {count}</span>
+        <button
+          className="border rounded-md px-2 py-3 bg-green-700"
+          onClick={() => setCount(count + 1)}
+        >
+          增加數量+
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+到 .astro 的 script 標籤或 .mdx 做使用
+
+<Counter client:load />
+
+**匯入的程式碼**
+
+```
+import Counter from '@/components/Counter';
+
+<Counter client:load />;
+```
+
+這邊要注意astro都是預先渲染的所以需要在元件上加上**client:load**才能在客戶端使用
+
+## Vue components
+
+vue的component也做一樣的匯入
+這邊使用vue的input為例
+
+```vue
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const text = ref('');
+</script>
+
+<template>
+  <div>
+    輸入的文字 {{ text }}
+    <br />
+    <input type="text" v-model="text" />
+  </div>
+</template>
+```
+
+<InputModal client:load />
+
+```ts
+import InputModal from '@/components/InputModal.vue';
+
+<Counter client:load />;
+```
+
+## 結語
+
+我們可以輕鬆的在.astro中或是.mdx的文件內透過import react或 vue的檔案渲染出可以和用戶互動的元素
+而為了可以互動效果需要在元件client的屬性加上load或是其他
+
+想知道更多有關的知識可以參考
+
+[astro官文文檔](https://docs.astro.build/zh-tw/basics/astro-components/#%E5%85%83%E4%BB%B6%E6%A8%A1%E6%9D%BF)
+[網頁東東](https://www.webdong.dev/post/astro-ui-framework-integration/)

@@ -2,6 +2,13 @@
 銀光菇 [Gingene](https://github.com/Gingene/silverfungi)
 ::github{repo="Gingene/silverfungi"}
 
+## 小小工程師的夢想就是在那廣大的軟體界提供一份力量
+
+### 技術
+- 前端三寶
+- Bootstrap 5, Tailwind Css
+- Vue, React
+
 ---
 
 This website is based on [Fuwari](https://github.com/saicaca/fuwari).

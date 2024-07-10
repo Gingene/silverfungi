@@ -41,14 +41,14 @@ function Counter() {
   return (
     <div>
       <div className="space-x-2">
-        <button
+        <button type="button"
           className="border rounded-md px-2 py-3 bg-amber-700"
           onClick={() => setCount(count - 1)}
         >
           減少數量-
         </button>
         <span>Count: {count}</span>
-        <button
+        <button type="button"
           className="border rounded-md px-2 py-3 bg-green-700"
           onClick={() => setCount(count + 1)}
         >

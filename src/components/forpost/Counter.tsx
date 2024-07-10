@@ -9,6 +9,7 @@ function Counter() {
       <br />
       <div className='space-x-4'>
         <button
+          type='button'
           className='border rounded-md px-2 py-3 bg-amber-700'
           onClick={() => setCount(count - 1)}
         >
@@ -16,6 +17,7 @@ function Counter() {
         </button>
         <span>Count: {count}</span>
         <button
+          type='button'
           className='border rounded-md px-2 py-3 bg-green-700'
           onClick={() => setCount(count + 1)}
         >

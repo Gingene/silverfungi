@@ -8,7 +8,7 @@ import { LinkPreset } from './types/config'
 
 export const siteConfig: SiteConfig = {
   title: '銀光菇',
-  subtitle: '不起眼的前端工程師',
+  subtitle: '在電腦前就會產生無止盡多巴胺的前端',
   lang: 'zh_TW', // 'en', 'zh_CN', 'zh_TW', 'ja'
   themeColor: {
     hue: 250, // Default hue for the theme color, from 0 to 360. e.g. red: 0, teal: 200, cyan: 250, pink: 345
@@ -46,7 +46,7 @@ export const profileConfig: ProfileConfig = {
   avatar:
     'https://raw.githubusercontent.com/Gingene/astro-portfolio/main/public/avatar.png', // Relative to the /src directory. Relative to the /public directory if it starts with '/'
   name: '銀光菇',
-  bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  bio: '學習是愉快，因為它能充滿人生',
   links: [
     {
       name: 'Twitter',

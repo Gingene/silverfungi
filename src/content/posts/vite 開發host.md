@@ -69,6 +69,7 @@ npx vite --host
 這對於想在開發階段就先用手機debug或是雙電腦開發的人應該都蠻方便的
 
 手機開發的畫面
+![image](https://github.com/Gingene/astro-portfolio/blob/main/public/vite-post/vite-mobile1.png?raw=true)
 
 ### 專案模式
 

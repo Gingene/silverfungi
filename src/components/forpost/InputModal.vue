@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const text = ref('')
+console.log(text)
 </script>
 
 <template>

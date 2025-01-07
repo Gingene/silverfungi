@@ -1,0 +1,234 @@
+<div class="container">
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1710880079976-0b838851c8c5?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="圖片1" fetchpriority="high">
+      </div>
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1711025088918-d115e4901ad1?q=80&w=1558&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="圖片2" fetchpriority="low">
+      </div>
+      <div class="carousel-slide">
+        <img src="https://images.unsplash.com/photo-1711025002903-414c9664b5e7?q=80&w=1494&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="圖片3" fetchpriority="low">
+      </div>
+    </div>
+    <button type="button" class="carousel-btn prev-btn">上一張</button>
+    <button type="button" class="carousel-btn next-btn">下一張</button>
+  <div class="carousel-dots"></div>
+  <button type="button" class="test-btn">test</button>
+</div>
+<!-- <div>
+  <pre>
+    <code is:raw>
+      class Carousel {
+        carousel: HTMLElement;
+        slides: NodeListOf<Element>;
+        currentIndex: number;
+        isPlaying: boolean;
+        autoplayTimer: null;
+        constructor(element: HTMLElement) {
+          this.carousel = element;
+          this.slides = element.querySelectorAll(".slide");
+          this.currentIndex = 0;
+          this.isPlaying = false;
+          this.autoplayTimer = null;
+      
+          
+          const prevBtn = element.querySelector(".prev-btn");
+          const nextBtn = element.querySelector(".next-btn");
+          if (prevBtn === null) return
+          if (nextBtn === null) return
+      
+          prevBtn.addEventListener("click", () => {
+            this.move(-1);
+          });
+      
+          nextBtn.addEventListener("click", () => {
+            this.move(1);
+          });
+      
+          this.updateSlidePosition();
+      
+          // 滑鼠懸停時暫停
+          this.carousel.addEventListener("mouseenter", () => this.pause());
+      
+          // 滑鼠離開時繼續播放
+          this.carousel.addEventListener("mouseleave", () => this.autoplay());
+      
+          // 觸控事件處理
+          let touchStartX = 0;
+          this.carousel.addEventListener("touchstart", (e) => {
+            touchStartX = e.touches[0].clientX;
+            this.pause();
+          });
+      
+          this.carousel.addEventListener("touchend", (e) => {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+      
+            if (Math.abs(diff) > 50) {
+              this.move(diff > 0 ? 1 : -1);
+            }
+            this.autoplay();
+          });
+        }
+      
+        move(direction: number) {
+          this.currentIndex =
+            (this.currentIndex + direction + this.slides.length) % this.slides.length;
+          this.updateSlidePosition();
+        }
+      
+        updateSlidePosition() {
+          const offset = -this.currentIndex * 100;
+          const carouselInner = this.carousel.querySelector(".carousel-inner");
+          if (carouselInner && carouselInner instanceof HTMLElement) {
+              carouselInner.style.transform = `translateX(${offset}%)`;
+          }
+      }
+      
+        wait(ms: number) {
+          return new Promise((resolve) => setTimeout(resolve, ms));
+        }
+      
+        async autoplay(interval = 3000) {
+          if (this.isPlaying) return;
+      
+          this.isPlaying = true;
+      
+          try {
+            while (this.isPlaying) {
+              await this.wait(interval);
+              if (this.isPlaying) {
+                this.move(1);
+              }
+            }
+          } catch (error) {
+            console.error("Autoplay error:", error);
+            this.pause();
+          }
+        }
+      
+        pause() {
+          this.isPlaying = false;
+          if (this.autoplayTimer) {
+            clearTimeout(this.autoplayTimer);
+            this.autoplayTimer = null;
+          }
+        }
+      }
+      
+      const carousel = new Carousel(document.querySelector(".carousel")!);
+      carousel.autoplay();
+    </code>
+  </pre>
+</div> -->
+
+<script>
+class Carousel {
+  carousel: HTMLElement;
+  slides: NodeListOf<ChildNode>;
+  currentIndex: number;
+  isPlaying: boolean;
+  autoplayTimer: null;
+  constructor(element: HTMLElement) {
+    this.carousel = element;
+    this.slides = element.childNodes[0].childNodes
+    this.currentIndex = 0;
+    this.isPlaying = false;
+    this.autoplayTimer = null;
+
+    
+    const prevBtn = document.querySelector(".prev-btn");
+    const nextBtn = document.querySelector(".next-btn");
+
+    if (prevBtn === null) return
+    if (nextBtn === null) return
+    
+
+
+    prevBtn.addEventListener("click", () => {
+      console.log(-1);
+      this.move(-1);
+    });
+
+    nextBtn.addEventListener("click", () => {
+      console.log(1);
+      this.move(1);
+    });
+
+    // this.move(1)
+    this.updateSlidePosition();
+
+    // 滑鼠懸停時暫停
+    this.carousel.addEventListener("mouseenter", () => this.pause());
+
+    // 滑鼠離開時繼續播放
+    this.carousel.addEventListener("mouseleave", () => this.autoplay());
+
+    // 觸控事件處理
+    // let touchStartX = 0;
+    // this.carousel.addEventListener("touchstart", (e) => {
+    //   touchStartX = e.touches[0].clientX;
+    //   this.pause();
+    // });
+
+    // this.carousel.addEventListener("touchend", (e) => {
+    //   const touchEndX = e.changedTouches[0].clientX;
+    //   const diff = touchStartX - touchEndX;
+
+    //   if (Math.abs(diff) > 50) {
+    //     this.move(diff > 0 ? 1 : -1);
+    //   }
+    //   this.autoplay();
+    // });
+  }
+
+  move(direction: number) {
+    this.currentIndex =
+      (this.currentIndex + direction + this.slides.length) % this.slides.length;
+    this.updateSlidePosition();
+  }
+
+  updateSlidePosition() {
+    const offset = -this.currentIndex * 100;
+    const carouselInner = this.carousel.querySelector(".carousel-inner");
+    if (carouselInner && carouselInner instanceof HTMLElement) {
+        carouselInner.style.transform = `translateX(${offset}%)`;
+    }
+}
+
+  wait(ms: number) {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  async autoplay(interval = 3000) {
+    if (this.isPlaying) return;
+
+    this.isPlaying = true;
+
+    try {
+      while (this.isPlaying) {
+        await this.wait(interval);
+        if (this.isPlaying) {
+          this.move(1);
+        }
+      }
+    } catch (error) {
+      console.error("Autoplay error:", error);
+      this.pause();
+    }
+  }
+
+  pause() {
+    this.isPlaying = false;
+    if (this.autoplayTimer) {
+      clearTimeout(this.autoplayTimer);
+      this.autoplayTimer = null;
+    }
+  }
+}
+
+const carousel = new Carousel(document.querySelector(".carousel")!);
+carousel.autoplay();
+
+</script>

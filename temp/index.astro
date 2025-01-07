@@ -1,0 +1,61 @@
+---
+import '@/components/forpost/carousel-ex/carousel.css'
+import CarouselAEx from '@/components/forpost/carousel-ex/Carousel.astro'
+import CarouselVex from '@/components/forpost/carousel-ex/CarouselVex.vue'
+import CarouselRex from '@/components/forpost/carousel-ex/carouselRex'
+const props = Astro.props
+console.log(props)
+---
+
+<div class="displayArea">
+    <div class="astroContent transition">
+        <CarouselAEx />
+        <div>astro</div>
+    </div>
+    <div class="reactContent hidden">
+        <CarouselRex client:load/>
+        <div>react</div>
+    </div>
+    <div class="vueContent hidden">
+        <CarouselVex client:load />
+        <div>vue</div>
+    </div>
+</div>
+
+<div class="space-x-4" id="btns">
+    <button type="button" class="border-2 px-2">
+        Astro
+    </button>
+    <button type="button" class="border-2 px-2">
+        React
+    </button>
+    <button type="button" class="border-2 px-2">
+        Vue
+    </button>
+</div>
+
+<script>
+    const btns = document.querySelector('#btns')!;
+    const astroBtn = btns.children[0]
+    const reactBtn = btns.children[1]
+    const vueBtn = btns.children[2]
+    const displayArea = document.querySelector('.displayArea')!
+    function componentVisible(element: Element) {
+        element.addEventListener('click', () => {
+            const areas = displayArea?.children
+            for (const area of areas) {
+                area.classList.add('hidden')
+            }
+            if (element === astroBtn) {
+                areas[0].classList.remove('hidden')
+            } else if (element === reactBtn) {
+                areas[1].classList.remove('hidden')
+            } else if (element === vueBtn) {
+                areas[2].classList.remove('hidden')
+            }
+        })
+    }
+    componentVisible(astroBtn)
+    componentVisible(reactBtn)
+    componentVisible(vueBtn)
+</script>

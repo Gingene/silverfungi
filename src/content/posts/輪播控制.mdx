@@ -1,0 +1,114 @@
+---
+title: 輪播控制
+published: 2025-01-06
+description: 輪播控制的JS和框架寫法
+image: ''
+author: '銀光菇'
+tags: [Astro, Blogging, 前端]
+category: '前端'
+draft: false 
+---
+import CarouselRex from '@components/forpost/carouselEx/CarouselRex'
+import CarouselVex from '@components/forpost/carouselEx/CarouselVex.vue'
+
+# 使用餘數控制輪播的進行
+一般使用 (當前圖片索引值 + 要前進的數量) % 輪播圖片數量 反方向則為減去後退的數量  
+**但若索引值為0減完後會變成負數所以需要先將索引值 + 輪播圖片數量 後在加減前進或後退的數量**  
+最後會得到  
+**(當前圖片索引值 + 輪播圖片數量 +- 要前進或後退的數量) % 輪播圖片數量**
+
+## 原生JS使用範例  
+由於遇到技術性問題請[參考連結](https://codepen.io/genesynthesis/pen/jENmLVp)
+
+## React範例
+<CarouselRex client:load />
+
+**輪播元件**
+```tsx
+const move = useCallback(
+    (direction: number) => {
+      setCurrentIndex(
+        prevIndex => (prevIndex + direction + images.length) % images.length,
+      )
+    },
+    [images.length],
+)
+```
+
+```tsx
+// 元件外部 使用示例
+import Carousel from './CarouselComponent'
+
+const CarouselRex = () => {
+  type Image = {
+    src: string
+    alt: string
+  }
+  type Images = Image[]
+
+  const images: Images = [
+    {
+      src: 'https://images.unsplash.com/photo-1710880079976-0b838851c8c5?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: '圖片1',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1711025088918-d115e4901ad1?q=80&w=1558&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: '圖片2',
+    },
+    {
+      src: 'https://images.unsplash.com/photo-1711025002903-414c9664b5e7?q=80&w=1494&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      alt: '圖片3',
+    },
+  ]
+
+  return (
+    <div className='carouselRex'>
+      <Carousel images={images} />
+    </div>
+  )
+}
+
+export default CarouselRex
+
+```
+
+## Vue範例
+<CarouselVex client:load />
+
+**輪播元件**
+```js
+const move = (direction) => {
+  currentIndex.value =
+    (currentIndex.value + direction + props.images.length) % props.images.length
+}
+```
+
+```vue
+<template>
+  <div class="app">
+    <Carousel :images="images" />
+  </div>
+</template>
+
+<script setup>
+import Carousel from './CarouselVue.vue'
+
+const images = [
+  {
+    src: 'https://images.unsplash.com/photo-1710880079976-0b838851c8c5?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: '圖片1',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1711025088918-d115e4901ad1?q=80&w=1558&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: '圖片2',
+  },
+  {
+    src: 'https://images.unsplash.com/photo-1711025002903-414c9664b5e7?q=80&w=1494&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    alt: '圖片3',
+  },
+]
+</script>
+
+```
+
+剩餘程式碼可以參考github
